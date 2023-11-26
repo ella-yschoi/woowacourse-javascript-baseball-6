@@ -5,13 +5,13 @@ const printMessage = (message) => Console.print(message);
 
 const generateNumberInRange = (min, max) => Random.pickNumberInRange(min, max);
 
-const throwError = (message, condition = true) => {
-  if (condition) throw new Error(message);
+const throwError = (message) => {
+throw new Error(message);
 };
 
-const isNumeric = (userInputValue) => REGEX.positive_integer.test(userInputValue);
+const isNumeric = (input) => REGEX.positive_integer.test(input);
 
-const isUniqueDigits = (userInputValue) => new Set(userInputValue.toString().split('')).size === GAME.size;
+const isUniqueDigits = (input) => new Set(input.toString().split('')).size === GAME.size;
 
 const convertStringToArray = (string) => string.split('');
 
