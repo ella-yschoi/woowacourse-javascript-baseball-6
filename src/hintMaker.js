@@ -1,10 +1,9 @@
 import { HINT } from './constants.js';
-import { convertStringToArray } from './utils.js';
 
 const countStrike = (computerNumber, userNumber) => {
   let strikeNumber = 0;
-  const computerNumberArray = convertStringToArray(computerNumber);
-  const userNumberArray = convertStringToArray(userNumber);
+  const computerNumberArray = computerNumber.split('');
+  const userNumberArray = userNumber.split('');
 
   for (let i = 0; i < computerNumber.length; i+=1) {
     if (computerNumberArray[i] === userNumberArray[i]) {
@@ -16,8 +15,8 @@ const countStrike = (computerNumber, userNumber) => {
 };
 
 const countBall = (computerNumber, userNumber, strikeNumber) => {
-  const computerNumberArray = convertStringToArray(computerNumber);
-  const userNumberArray = convertStringToArray(userNumber);
+  const computerNumberArray = computerNumber.split('');
+  const userNumberArray = userNumber.split('');
   const commonNumbers = computerNumberArray.filter((number) => userNumberArray.includes(number)).length;
 
   return commonNumbers - strikeNumber;

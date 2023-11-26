@@ -13,8 +13,4 @@ const isNumeric = (input) => REGEX.positive_integer.test(input);
 
 const isUniqueDigits = (input) => new Set(input.toString().split('')).size === GAME.size;
 
-const convertStringToArray = (string) => string.split('');
-
-export {
-  printMessage, generateNumberInRange, throwError, isNumeric, isUniqueDigits, convertStringToArray,
-};
+export { printMessage, generateNumberInRange, throwError, isNumeric, isUniqueDigits };
