@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import Generator from './Generator.js';
 import isValidGameInputDuringGame from './validator.js';
-import { getHintToUser } from './hintMaker.js';
+import getHintToUser from './hintMaker.js';
 import { LOG, HINT, GAME, ERROR } from './constants.js';
 import { printMessage, throwError } from './utils.js'
 

@@ -25,24 +25,19 @@ const countBall = (computerNumber, userNumber, strikeNumber) => {
 const convertNumberToString = (strikeNumber, ballNumber) => {
   let hintMessage = '';
 
-  if (ballNumber > 0) {
-    hintMessage += `${ballNumber}${HINT.ball} `;
-  }
+  if (ballNumber > 0) hintMessage += `${ballNumber}${HINT.ball} `;
+  if (strikeNumber > 0) hintMessage += `${strikeNumber}${HINT.strike}`;
+  if (hintMessage === '') return HINT.nothing;
 
-  if (strikeNumber > 0) {
-    hintMessage += `${strikeNumber}${HINT.strike}`;
-  }
-
-  if (!hintMessage) {
-    hintMessage += HINT.nothing }
-
-  return hintMessage;
+  return hintMessage.trim();
 };
 
-export const getHintToUser = (computerNumber, userNumber) => {
+const getHintToUser = (computerNumber, userNumber) => {
   const strikeNumber = countStrike(computerNumber, userNumber);
   const ballNumber = countBall(computerNumber, userNumber, strikeNumber);
   const hintMessage = convertNumberToString(strikeNumber, ballNumber);
 
   return hintMessage;
 };
+
+export default getHintToUser;
