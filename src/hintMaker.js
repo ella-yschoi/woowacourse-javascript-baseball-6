@@ -27,15 +27,15 @@ const convertNumberToString = (strikeNumber, ballNumber) => {
   let hintMessage = '';
 
   if (ballNumber > 0) {
-    hintMessage += `${ballNumber}${HINT_MESSAGE.BALL} `;
+    hintMessage += `${ballNumber}${HINT_MESSAGE.ball} `;
   }
 
   if (strikeNumber > 0) {
-    hintMessage += `${strikeNumber}${HINT_MESSAGE.STRIKE}`;
+    hintMessage += `${strikeNumber}${HINT_MESSAGE.strike}`;
   }
 
   if (!hintMessage) {
-    hintMessage += HINT_MESSAGE.NOTING;
+    hintMessage += HINT_MESSAGE.nothing;
   }
 
   return hintMessage;

@@ -9,7 +9,7 @@ class App {
   }
 
   async play() {
-    printMessage(LOG_MESSAGE.START_GAME);
+    printMessage(LOG_MESSAGE.start_game);
     await this.game.startGame();
   }
 }

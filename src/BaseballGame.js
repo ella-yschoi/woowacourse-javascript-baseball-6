@@ -15,26 +15,26 @@ class BaseballGame {
   }
 
   async getUserInput() {
-    const input = await Console.readLineAsync(LOG_MESSAGE.INPUT_NUMBER);
+    const input = await Console.readLineAsync(LOG_MESSAGE.input_number);
     this.handleUserInputDuringGame(input);
   }
 
   async recommendRestart() {
-    await printMessage(LOG_MESSAGE.CORRECT_END);
+    await printMessage(LOG_MESSAGE.correct_end);
 
-    const input = await Console.readLineAsync(`${LOG_MESSAGE.RESTART_INPUT}\n`);
+    const input = await Console.readLineAsync(`${LOG_MESSAGE.restart_input}\n`);
     this.handleUserInputEndGame(input);
   }
 
   handleUserInputDuringGame(input) {
     if (!isValidGameInputDuringGame(input)) {
-      throwError(ERROR_MESSAGE.INCORRECT_VALUE);
+      throwError(ERROR_MESSAGE.incorrect_value);
     }
 
     const hintMessage = getHintToUser(this.computer.computerNumber, input);
     printMessage(hintMessage);
 
-    if (hintMessage === HINT_MESSAGE.ALL_STRIKE) {
+    if (hintMessage === HINT_MESSAGE.all_strike) {
       this.recommendRestart();
       return;
     }
@@ -42,18 +42,18 @@ class BaseballGame {
   }
 
   async handleUserInputEndGame(input) {
-    const isValidGameInputEndGame = [GAME_SELECT.RESTART, GAME_SELECT.END];
+    const isValidGameInputEndGame = [GAME_SELECT.restart, GAME_SELECT.end];
 
     if (!isValidGameInputEndGame.includes(input)) {
-      throwError(ERROR_MESSAGE.INCORRECT_VALUE);
+      throwError(ERROR_MESSAGE.incorrect_value);
       return;
     }
-    if (input === GAME_SELECT.RESTART) {
+    if (input === GAME_SELECT.restart) {
       this.restartGame();
       return;
     }
-    if (input === GAME_SELECT.END) {
-      printMessage(LOG_MESSAGE.END_GAME);
+    if (input === GAME_SELECT.end) {
+      printMessage(LOG_MESSAGE.end_game);
     }
   }
 
