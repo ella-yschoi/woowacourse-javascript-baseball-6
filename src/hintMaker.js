@@ -1,4 +1,4 @@
-import { HINT_MESSAGE } from './constants.js';
+import { HINT } from './constants.js';
 import { convertStringToArray } from './utils.js';
 
 const countStrike = (computerNumber, userNumber) => {
@@ -6,7 +6,7 @@ const countStrike = (computerNumber, userNumber) => {
   const computerNumberArray = convertStringToArray(computerNumber);
   const userNumberArray = convertStringToArray(userNumber);
 
-  for (let i = 0; i < computerNumber.length; i++) {
+  for (let i = 0; i < computerNumber.length; i+=1) {
     if (computerNumberArray[i] === userNumberArray[i]) {
       strikeNumber += 1;
     }
@@ -27,16 +27,15 @@ const convertNumberToString = (strikeNumber, ballNumber) => {
   let hintMessage = '';
 
   if (ballNumber > 0) {
-    hintMessage += `${ballNumber}${HINT_MESSAGE.ball} `;
+    hintMessage += `${ballNumber}${HINT.ball} `;
   }
 
   if (strikeNumber > 0) {
-    hintMessage += `${strikeNumber}${HINT_MESSAGE.strike}`;
+    hintMessage += `${strikeNumber}${HINT.strike}`;
   }
 
   if (!hintMessage) {
-    hintMessage += HINT_MESSAGE.nothing;
-  }
+    hintMessage += HINT.nothing }
 
   return hintMessage;
 };

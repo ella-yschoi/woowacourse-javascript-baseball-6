@@ -1,23 +1,18 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import { GAME, REGEX } from './constants.js';
 
-// 사용자에게 메시지를 출력하는 함수
 const printMessage = (message) => Console.print(message);
 
-// 컴퓨터가 랜덤한 숫자를 생성하는 함수
 const generateNumberInRange = (min, max) => Random.pickNumberInRange(min, max);
 
-// 에러를 출력하는 함수
 const throwError = (message, condition = true) => {
   if (condition) throw new Error(message);
 };
 
-// 입력값이 1부터 9까지의 숫자인지 판별하는 함수
-const isNumeric = (userInputValue) => /^[1-9]+$/.test(userInputValue);
+const isNumeric = (userInputValue) => REGEX.positive_integer.test(userInputValue);
 
-// 입력값이 중복인지 판별하는 함수
-const isUniqueDigits = (userInputValue) => new Set(userInputValue.toString().split('')).size === 3;
+const isUniqueDigits = (userInputValue) => new Set(userInputValue.toString().split('')).size === GAME.size;
 
-// 문자열을 배열로 변환하는 함수
 const convertStringToArray = (string) => string.split('');
 
 export {

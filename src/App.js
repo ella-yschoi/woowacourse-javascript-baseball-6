@@ -1,5 +1,5 @@
 import BaseballGame from './BaseballGame.js';
-import { LOG_MESSAGE } from './constants.js';
+import { LOG } from './constants.js';
 import { printMessage } from './utils.js'
 
 class App {
@@ -8,7 +8,7 @@ class App {
   }
 
   async play() {
-    printMessage(LOG_MESSAGE.start_game);
+    printMessage(LOG.start_game);
     await this.game.startGame();
   }
 }

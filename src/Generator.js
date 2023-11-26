@@ -1,4 +1,5 @@
-import { generateNumberInRange } from './utils.js'
+import { GAME } from './constants.js';
+import { generateNumberInRange } from './utils.js';
 
 class Generator {
   constructor() {
@@ -12,8 +13,8 @@ class Generator {
   generateRandomNumber() {
     const generatedNumber = new Set();
 
-    while (generatedNumber.size < 3) {
-      const newComputerNumber = generateNumberInRange(1, 9);
+    while (generatedNumber.size < GAME.size) {
+      const newComputerNumber = generateNumberInRange(GAME.min_count, GAME.max_count);
       generatedNumber.add(newComputerNumber);
     }
 
