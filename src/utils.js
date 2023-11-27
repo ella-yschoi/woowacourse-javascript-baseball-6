@@ -11,6 +11,11 @@ throw new Error(message);
 
 const isNumeric = (input) => REGEX.positive_integer.test(input);
 
-const isUniqueDigits = (input) => new Set(input.toString().split('')).size === GAME.size;
+const isUniqueDigits = (input) => {
+  const inputString = input.toString();
+  const digits = inputString.split('');
+  const uniqueDigits = new Set(digits);
+  return uniqueDigits.size === GAME.size;
+};
 
 export { printMessage, generateNumberInRange, throwError, isNumeric, isUniqueDigits };
