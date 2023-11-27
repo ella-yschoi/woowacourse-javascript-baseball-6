@@ -1,7 +1,7 @@
-import { GAME } from './constants.js';
-import { generateNumberInRange } from './utils.js';
+import { GAME } from './common/constants.js';
+import { generateNumberInRange } from './common/utils.js';
 
-class Generator {
+class RandomGenerator {
   constructor() {
     this.computerNumber = this.generateRandomNumber();
   }
@@ -22,4 +22,4 @@ class Generator {
   }
 }
 
-export default Generator;
+export default RandomGenerator;
