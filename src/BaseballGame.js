@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import Generator from './Generator.js';
 import isValidGameInputDuringGame from './validator.js';
-import getHintToUser from './hintMaker.js';
+import HintGenerator from './HintGenerator.js';
 import { LOG, HINT, GAME, ERROR } from './constants.js';
 import { printMessage, throwError } from './utils.js'
 
@@ -31,7 +31,7 @@ class BaseballGame {
       throwError(ERROR.incorrect_value);
     }
 
-    const hintMessage = getHintToUser(this.computer.computerNumber, input);
+    const hintMessage = HintGenerator.getHint(this.computer.computerNumber, input);
     printMessage(hintMessage);
 
     if (hintMessage === HINT.all_strike) {
