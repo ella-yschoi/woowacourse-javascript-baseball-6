@@ -1,6 +1,6 @@
 import BaseballGame from './BaseballGame.js';
-import { LOG } from './constants.js';
-import { printMessage } from './utils.js'
+import { LOG } from './common/constants.js';
+import { printMessage } from './common/utils.js';
 
 class App {
   constructor() {

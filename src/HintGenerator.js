@@ -1,4 +1,4 @@
-import { HINT } from './constants.js';
+import { HINT } from './common/constants.js';
 
 class HintGenerator {
   static convertNumberToArray(number) {

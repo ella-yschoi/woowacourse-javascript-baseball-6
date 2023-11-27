@@ -1,13 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
-import Generator from './Generator.js';
-import isValidGameInputDuringGame from './validator.js';
+import RandomGenerator from './RandomGenerator.js';
+import isValidGameInputDuringGame from './common/validator.js';
 import HintGenerator from './HintGenerator.js';
-import { LOG, HINT, GAME, ERROR } from './constants.js';
-import { printMessage, throwError } from './utils.js'
+import { LOG, HINT, GAME, ERROR } from './common/constants.js';
+import { printMessage, throwError } from './common/utils.js'
 
 class BaseballGame {
   constructor() {
-    this.computer = new Generator();
+    this.computer = new RandomGenerator();
   }
 
   async startGame() {
