@@ -36,7 +36,7 @@ class BaseballGame {
     }
 
     // 입력한 값에 따라 힌트 출력하기 -> HintGenerator 활용
-    const hintMessage = HintGenerator.getHint(this.computuer.generateNumber, input);
+    const hintMessage = HintGenerator.getHint(this.computuer.computerNumber, input);
     printMessage(hintMessage);
 
     // 스트라이크 -> 재시작 묻기

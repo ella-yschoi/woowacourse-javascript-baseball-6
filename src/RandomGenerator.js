@@ -3,11 +3,11 @@ import { GAME } from './common/constants.js';
 
 class RandomGenerator {
   constructor() {
-    this.generateComputerNumber = new this.generateNumber();
+    this.computerNumber = this.generateNumber();
   }
 
   generateNewNumber() {
-    this.generateComputerNumber = new this.generateNumber();
+    this.computerNumber = this.generateNumber();
   }
 
   generateNumber() {
