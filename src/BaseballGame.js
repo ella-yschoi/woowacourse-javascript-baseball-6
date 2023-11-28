@@ -6,50 +6,62 @@ import { printMessage, throwError } from './common/utils.js';
 import isValidInputDuringGame from './common/validator.js';
 
 class BaseballGame {
-  // 랜덤 숫자 생성하기
+  /**
+  * BaseballGame 클래스의 인스턴스를 생성한다.
+  * 랜덤 숫자 생성기 인스턴스를 초기화한다.
+  */
   constructor() {
     this.computuer = new RandomGenerator();
   }
 
-  // 게임 시작
+  /**
+  * 게임 시작과 동시에 사용자로부터 숫자를 입력받는다.
+  */
   async startGame() {
     await this.getUserInput();
   }
 
-  // 세 자리 숫자 입력받기
+  /**
+  * 사용자로부터 세 자리 숫자를 입력받는다.
+  */
   async getUserInput() {
     const input = await Console.readLineAsync(LOG.input_number);
     this.handleUserInputDuringGame(input)
   }
 
-  // 성공하면 재시작 여부 묻기
+  /**
+  * 사용자가 정답을 맞췄을 경우, 게임 재시작 여부를 묻는다.
+  */
   async recommendRestart() {
     printMessage(LOG.correct_end);
     const input = await Console.readLineAsync(`${LOG.restart_input}\n`);
     this.handleUserInputEndGame(input);
   }
 
+  /**
+  * 게임 중 사용자의 입력을 처리한다.
+  * @param {string} input - 사용자로부터 입력받은 숫자.
+  */
   handleUserInputDuringGame(input) {
-    // 입력받은 숫자 유효성 검증해서 아니면 에러 뱉기
     if(!isValidInputDuringGame(input)) {
       throwError(ERROR.incorrect_value);
     }
 
-    // 입력한 값에 따라 힌트 출력하기 -> HintGenerator 활용
     const hintMessage = HintGenerator.getHint(this.computuer.computerNumber, input);
     printMessage(hintMessage);
 
-    // 스트라이크 -> 재시작 묻기
     if (hintMessage === HINT.all_strike) {
       this.recommendRestart();
       return;
     }
 
-    // 아니면 -> 다시 입력 받기
     this.getUserInput();
   }
   
-  // 재시작 여부 유효성 검증 -> 1이나 2 아니면 에러
+  /**
+  * 게임 종료 후 사용자의 입력을 처리한다.
+  * @param {string} input - 사용자로부터 입력받은 숫자.
+  */
   async handleUserInputEndGame(input) {
     const isValidRecommendValue = [GAME.restart, GAME.end];
 
@@ -66,7 +78,9 @@ class BaseballGame {
     }
   }
 
-  // 게임 재시작 로직
+  /**
+  * 게임을 재시작한다.
+  */
   restartGame() {
     this.computuer.generateNewNumber();
     this.startGame();

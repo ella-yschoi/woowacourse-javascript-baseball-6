@@ -1,14 +1,22 @@
 import { HINT } from './common/constants.js';
 
 class HintGenerator {
-  // 숫자 형태로 받은 것을 문자열로 변환한 후 배열로 변환
+  /**
+  * 주어진 숫자를 문자열 배열로 변환한다.
+  * @param {number|string} number - 변환할 숫자는 문자열이 아닐 경우 문자열로 변환된다.
+  * @returns {string[]} 숫자의 각 자리를 요소로 하는 문자열 배열
+  */
   static convertNumberToArray(number) {
-    // 숫자가 문자열이 아닐 경우 문자열로 변환
     const numberString = number.toString();
     return numberString.split('');
   }
 
-  // 스트라이크 개수 계산 (유저 배열과 컴퓨터 배열을 비교: reduce 사용)
+  /**
+  * 스트라이크의 개수를 계산한다.
+  * @param {string[]} userNumberArray - 사용자의 숫자 배열
+  * @param {string[]} computerNumberArray - 컴퓨터의 숫자 배열
+  * @returns {number} 스트라이크의 개수
+  */
   static countStrike(userNumberArray, computerNumberArray) {
     return userNumberArray.reduce((strike, num, index) => {
       if (num === computerNumberArray[index]) {
@@ -18,14 +26,24 @@ class HintGenerator {
     }, 0);
   }
 
-  // 볼 개수 계산 (유저 배열과 컴퓨터 배열 비교: filter 사용 -> 스트라이크 개수 빼기)
+  /**
+  * 볼의 개수를 계산한다.
+  * @param {string[]} userNumberArray - 사용자의 숫자 배열
+  * @param {string[]} computerNumberArray - 컴퓨터의 숫자 배열
+  * @returns {number} 볼의 개수
+  */
   static countBall(userNumberArray, computerNumberArray) {
     const commonNumbers = userNumberArray.filter(num => computerNumberArray.includes(num)).length;
     const strikeNumber = this.countStrike(userNumberArray, computerNumberArray);
     return commonNumbers - strikeNumber;
   }
 
-  // 위의 계산식에서 리턴된 숫자를 다시 문자열로 변환
+  /**
+  * 계산된 스트라이크와 볼의 개수를 문자열로 변환한다.
+  * @param {number} strikeNumber - 스트라이크의 개수
+  * @param {number} ballNumber - 볼의 개수
+  * @returns {string} 스트라이크와 볼의 상태를 설명하는 문자열
+  */
   static convertNumberToString(strikeNumber, ballNumber) {
     const hintParts = [];
     if (ballNumber > 0) hintParts.push(`${ballNumber}${HINT.ball}`);
@@ -33,7 +51,12 @@ class HintGenerator {
     return hintParts.join(' ') || HINT.nothing;
   }
 
-  // 변환된 유저 숫자와 컴퓨터 숫자를 비교해 힌트 제공 -> BaseballGame 클래스에서 사용 예정
+  /**
+  * 컴퓨터의 숫자와 사용자의 숫자를 비교하여 힌트를 제공한다.
+  * @param {number|string} computerNumber - 컴퓨터의 숫자
+  * @param {number|string} userNumber - 사용자의 숫자
+  * @returns {string} 게임의 현재 상태에 대한 힌트
+  */
   static getHint(computerNumber, userNumber) {
     const computerNumberArray = HintGenerator.convertNumberToArray(computerNumber);
     const userNumberArray = HintGenerator.convertNumberToArray(userNumber);
