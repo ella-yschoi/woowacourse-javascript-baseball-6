@@ -1,29 +1,13 @@
-import { ERROR, GAME } from './constants';
-import { isNumeric } from './utils'
+import { GAME } from './constants.js';
+import { isNumeric, isUniqueDigits } from './utils.js'
 
-const isValidGameInputDuringGame = (input) => {
-  if (!isNumeric(input)) {
-    throwError(ERROR.incorrect_value);
-    return false;
-  }
+const isValidInputDuringGame = (input) => {
+  const inputToSting = input.toString();
+  const isValidLength = inputToSting.length === GAME.size;
+  const isInputNumeric = isNumeric(input);
+  const hasUniqueValue = isUniqueDigits(input);
 
-  const number = parseInt(input, 10);
-  if (number < GAME.min_count || number > GAME.max_count) {
-    throwError(ERROR.incorrect_value);
-    return false;
-  }
-
-  if (input !== GAME.size) {
-    throwError(ERROR.incorrect_value);
-    return false;
-  }
-
-  if (!isUniqueDigits(number)) {
-    throwError(ERROR.incorrect_value);
-    return false;
-  }
-
-  return true;
+  return isValidLength && isInputNumeric && hasUniqueValue;
 };
 
-export default isValidGameInputDuringGame;
+export default isValidInputDuringGame;
