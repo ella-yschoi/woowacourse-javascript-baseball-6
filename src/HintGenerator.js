@@ -10,11 +10,11 @@ class HintGenerator {
 
   // 스트라이크 개수 계산 (유저 배열과 컴퓨터 배열을 비교: reduce 사용)
   static countStrike(userNumberArray, computerNumberArray) {
-    return userNumberArray.reduce((strikeNumber, num, index) => {
+    return userNumberArray.reduce((strike, num, index) => {
       if (num === computerNumberArray[index]) {
-        strikeNumber += 1;
+        strike += 1;
       }
-      return strikeNumber;
+      return strike;
     }, 0);
   }
 
@@ -28,8 +28,8 @@ class HintGenerator {
   // 위의 계산식에서 리턴된 숫자를 다시 문자열로 변환
   static convertNumberToString(strikeNumber, ballNumber) {
     const hintParts = [];
-    if (strikeNumber > 0) hintParts.push(`${strikeNumber}${HINT.strike}`);
     if (ballNumber > 0) hintParts.push(`${ballNumber}${HINT.ball}`);
+    if (strikeNumber > 0) hintParts.push(`${strikeNumber}${HINT.strike}`);
     return hintParts.join(' ') || HINT.nothing;
   }
 
