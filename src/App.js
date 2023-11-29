@@ -1,7 +1,6 @@
 import BaseballGame from './BaseballGame.js';
-import { Console } from '@woowacourse/mission-utils';
-import { LOG_MESSAGE } from './constants.js';
-import { printMessage } from './utils.js'
+import { LOG } from './common/constants.js';
+import { printMessage } from './common/utils.js';
 
 class App {
   constructor() {
@@ -9,12 +8,9 @@ class App {
   }
 
   async play() {
-    printMessage(LOG_MESSAGE.START_GAME);
+    printMessage(LOG.start_game);
     await this.game.startGame();
   }
 }
-
-const app = new App();
-app.play();
 
 export default App;

@@ -41,79 +41,45 @@
 
 ### 게임 시작
 
-- `Console.print()`로 `숫자 야구 게임을 시작합니다.` 출력
-- `startGame()`로 게임 시작 로직 실행
-- `App.js`의 `play()`로 게임 시작
+- [x] 메시지를 출력하며 `play()`로 게임을 시작한다.
 
 ### 컴퓨터 숫자 생성
 
-- `Generator` 클래스 생성
-- `generateRandomNumber()` 안에서 컴퓨터가 선택한 숫자를 생성
-  - 빈 배열 `generatedNumber` 선언 후, `new Set()`으로 중복 검사하여 `newComputerNumber` 생성
-  - `add()`로 해당 숫자를 Set 개체의 맨 뒤에 value 추가
-  - 값이 완성되면 `join()`으로 배열의 모든 값을 연결한 하나의 문자열로 리턴
+- [x] 컴퓨터가 랜덤한 세 자리 숫자를 생성한다.
 
 ### 사용자 숫자 입력
 
-- `BaseballGame` 클래스 생성
-- `startGame()`를 통해 `getUserInput()`가 실행됨
-- `getUserInput()`을 통해 사용자의 입력 값을 관리
-- `MissionUtils.Console.readLineAsync()`을 통해 사용자에게 입력을 받음
-- `this.handleUserInputDuringGame()`을 통해 사용자 입력 값을 관리
-  - `isValidGameInputDuringGame()`로 유효한 숫자인지 유효성 검사
-  - `getHintToUser()`로 조건에 맞는 `hintMessage` 출력
+- [x] 사용자에게 입력을 받는다.
+- [x] 사용자 입력 값을 관리하고 유효한 값인지 검사한다.
+- [x] 유효한 값이 아니라면 예외를 발생시켜 게임을 즉시 종료한다.
+- [x] 조건에 맞는 힌트를 출력한다.
 
 ### 진행 중 사용자의 숫자 유효성 검사
 
-- `isNumeric()`을 통해 1부터 9까지의 숫자만 포함되도록 정규표현식 사용
-- `isUniqueDigits()`을 통해 `Set()`의 size가 3인지 유효성 검사
-- `isValidGameInputDuringGame()`를 통해 `userInputValue`가 아래 세 경우가 아니라면 `true` 리턴
-  - `userInputValue`의 length가 3이 아니라면 `false` 리턴
-  - `isUniqueDigits()`를 통해 중복되는 숫자가 있다면 `false` 리턴
-  - `isNumeric()`를 통해 1부터 9까지의 숫자가 아니라면 `false` 리턴
+- [x] 1부터 9까지의 숫자만 포함되어야 한다.
+- [x] 3자리 숫자여야 한다.
+- [x] 중복되는 숫자가 없어야 한다.
 
 ### 사용자 숫자와 컴퓨터 숫자 비교해 힌트 리턴
 
-- `countStrike()` 안에서 스트라이크 개수 계산
-  - 입력: `computerNumber`, `userNumber`
-  - 출력: `strikeNumber`
-  - 두 문자열을 `convertStringToArray()`를 통해 배열로 변환
-  - 두 배열을 비교하여 같은 수라면 `strikeNumber` +1하고 리턴
-- `countBall()` 안에서 볼 개수 계산
-  - 입력: `computerNumber`, `userNumber`, `strikeNumber`
-  - 출력: `ballNumber`
-  - `filter()`로 `userNumber`와 `computerNumber`가 일치하는 `commonNumbers`만을 남기고 배열 생성
-  - 생성된 배열의 length에서 `strikeNumber`를 뺀 수를 리턴
-- 계산된 `strikeNumber`와 `ballNumber`를 `convertNumberToString()`의 인자로 전달
-  - 힌트 문자열 `hintMessage` 선언
-  - `ballNumber` > 0이면, `${ballNumber}`을 `hintMessage`에 추가
-  - `strikeNumber` > 0이면, `${strikeNumber}`을 `hintMessage`에 추가
-  - `hintMessage`가 없다면, `낫싱`을 `hintMessage`에 추가
-- `getHintToUser()`를 export해 게임 진행 중 `hintMessage`가 출력되도록 함
+- [x] 스트라이크 개수 계산 후 출력한다.
+- [x] 볼 개수를 계산 후 출력한다.
+- [x] 힌트 메시지가 없다면 낫싱을 출력한다.
 
 ### 컴퓨터의 숫자와 일치할 때까지 게임 반복
 
-- 사용자가 입력한 값을 `handleUserInputDuringGame()`에 전달
-- 컴퓨터의 숫자와 일치한다면,
-  - `recommendRestart()`안에서 `3스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료`를 출력
-  - `Console.readLineAsync()`를 통해 `게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.` 출력
-- 컴퓨터의 숫자와 불일치한다면,
-  - `Console.print()`로 `hintMessage` 출력
-  - `getUserInput()` 호출해 사용자가 다시 숫자를 입력하도록 함
+- [x] 사용자가 입력한 값이 컴퓨터의 숫자와 일치한다면, 재시작 여부를 묻는다.
+- [x] 사용자가 입력한 값이 컴퓨터의 숫자와 불일치한다면, 힌트를 출력하고 숫자를 다시 입력하도록 한다.
 
 ### 재시작 여부 판별
 
-- `handleUserInputEndGame()` 호출해 입력 값에 따라 재실행 여부를 판단
-  - 입력한 값이 1이면 `restartGame()` 호출해 게임 재시작
-    - `generateNewCorrectNumber()`를 통해 컴퓨터가 숫자 재생성
-    - `restartGame()`을 통해 새로운 랜덤 숫자를 생성하고 게임 시작 로직 실행
-  - 입력한 값이 2면 `Console.print`로 `게임 종료` 출력
+- [x] 사용자가 입력한 값이 1이면 게임을 재시작한다.
+- [x] 사용자가 입력한 값이 1이면 게임을 종료한다.
 
 ### 종료 후 사용자의 숫자 유효성 검사
 
-- `isValidGameInputEndGame()` 안에 1과 2가 포함된 배열 선언
-- `includes()`로 입력된 값에 1과 2의 포함 여부 확인
-  - 포함되어 있지 않다면, throw문으로 예외를 발생시켜 `Console.print()`로 `[ERROR] 숫자가 잘못된 형식입니다.` 출력하며 즉시 게임 종료
+- [x] 사용자가 입력한 값에 1과 2의 포함 여부를 확인한다.
+- [x] 포함되어 있지 않다면, 예외를 발생시켜 게임을 즉시 종료한다.
 
 <br/>
 
@@ -156,3 +122,6 @@
 - [x] 모든 문자열을 불변한 상수로 동결하기
 - [x] 파일명과 메서드명을 직관적으로 명시하기
 - [x] 비즈니스 로직이 아닌 함수들을 utils.js에 분리하기
+- [x] 불필요한 메서드나 반복되는 부분들을 제거
+- [x] 함수의 길이를 15줄 이내로 수정
+- [x] 일부 함수들을 클래스화

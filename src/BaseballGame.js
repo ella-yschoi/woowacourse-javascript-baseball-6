@@ -1,13 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
-import Generator from './Generator.js';
-import { isValidGameInputDuringGame } from './validator.js';
-import { getHintToUser } from './hintMaker.js';
-import { LOG_MESSAGE, HINT_MESSAGE, GAME_SELECT, ERROR_MESSAGE } from './constants.js';
-import { printMessage, throwError } from './utils.js'
+import RandomGenerator from './RandomGenerator.js';
+import isValidGameInputDuringGame from './common/validator.js';
+import HintGenerator from './HintGenerator.js';
+import { LOG, HINT, GAME, ERROR } from './common/constants.js';
+import { printMessage, throwError } from './common/utils.js'
 
 class BaseballGame {
   constructor() {
-    this.computer = new Generator();
+    this.computer = new RandomGenerator();
   }
 
   async startGame() {
@@ -15,26 +15,26 @@ class BaseballGame {
   }
 
   async getUserInput() {
-    const input = await Console.readLineAsync(LOG_MESSAGE.INPUT_NUMBER);
+    const input = await Console.readLineAsync(LOG.input_number);
     this.handleUserInputDuringGame(input);
   }
 
   async recommendRestart() {
-    await printMessage(LOG_MESSAGE.CORRECT_END);
+    await printMessage(LOG.correct_end);
 
-    const input = await Console.readLineAsync(`${LOG_MESSAGE.RESTART_INPUT}\n`);
+    const input = await Console.readLineAsync(`${LOG.restart_input}\n`);
     this.handleUserInputEndGame(input);
   }
 
   handleUserInputDuringGame(input) {
     if (!isValidGameInputDuringGame(input)) {
-      throwError(ERROR_MESSAGE.INCORRECT_VALUE);
+      throwError(ERROR.incorrect_value);
     }
 
-    const hintMessage = getHintToUser(this.computer.computerNumber, input);
+    const hintMessage = HintGenerator.getHint(this.computer.computerNumber, input);
     printMessage(hintMessage);
 
-    if (hintMessage === HINT_MESSAGE.ALL_STRIKE) {
+    if (hintMessage === HINT.all_strike) {
       this.recommendRestart();
       return;
     }
@@ -42,18 +42,18 @@ class BaseballGame {
   }
 
   async handleUserInputEndGame(input) {
-    const isValidGameInputEndGame = [GAME_SELECT.RESTART, GAME_SELECT.END];
+    const isValidGameInputEndGame = [GAME.restart, GAME.end];
 
     if (!isValidGameInputEndGame.includes(input)) {
-      throwError(ERROR_MESSAGE.INCORRECT_VALUE);
+      throwError(ERROR.incorrect_value);
       return;
     }
-    if (input === GAME_SELECT.RESTART) {
+    if (input === GAME.restart) {
       this.restartGame();
       return;
     }
-    if (input === GAME_SELECT.END) {
-      printMessage(LOG_MESSAGE.END_GAME);
+    if (input === GAME.end) {
+      printMessage(LOG.end_game);
     }
   }
 
